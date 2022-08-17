@@ -4,6 +4,7 @@ import { FormDataModule } from './form-data/form-data.module';
 import { FormDownloadModule } from './form-download/form-download.module';
 import { FormEditModule } from './form-edit/form-edit.module';
 import { FormSubmitModule } from './form-submit/form-submit.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { FormSubmitModule } from './form-submit/form-submit.module';
     FormDownloadModule,
     FormEditModule,
     FormSubmitModule,
+    AuthModule,
   ],
 })
 export class CoreModule {}
