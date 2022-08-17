@@ -4,10 +4,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DataSourceModule } from './data-source.module';
 import { EntitiesModule } from './entities/entities.module';
-import { FormCreationModule } from './core/form-creation/form-creation.module';
+import { CoreModule } from './core/core.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), DataSourceModule, EntitiesModule, FormCreationModule],
+  imports: [
+    ConfigModule.forRoot(),
+    DataSourceModule,
+    EntitiesModule,
+    CoreModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
