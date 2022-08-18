@@ -1,1 +1,1 @@
-create extension "uuid-ossp" schema tc2007b;
+create extension "uuid-ossp";
