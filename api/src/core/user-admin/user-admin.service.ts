@@ -24,7 +24,7 @@ export class UserAdminService implements OnModuleInit {
     this.#logger.log(`Root admin: ${root.email}`);
   }
 
-  async find(id: string): Promise<UserAdminEntity> {
+  async findById(id: string): Promise<UserAdminEntity> {
     const user = await this.ds.manager.findOneBy(UserAdminEntity, { id });
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
