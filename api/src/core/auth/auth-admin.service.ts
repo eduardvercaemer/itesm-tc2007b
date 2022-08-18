@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AdminCredentials } from 'src/data/AdminCredentials';
 import { Auth } from 'src/data/Auth';
@@ -8,6 +8,8 @@ import { transactional } from '../transactional';
 
 @Injectable()
 export class AuthAdminService {
+  #logger = new Logger('AuthAdminService');
+
   constructor(
     private readonly ds: DataSource,
     private readonly jwtService: JwtService,
@@ -26,13 +28,14 @@ export class AuthAdminService {
       });
 
       if (!user) throw new UnauthorizedException();
+      this.#logger.log(`User ${user.id} logged in`);
 
       return user;
     });
   }
 
   async login(user: UserAdminEntity): Promise<Auth> {
-    const payload = { id: user.id };
+    const payload = { id: user.id, kind: user.kind };
     const accessToken = await this.jwtService.sign(payload);
     return {
       accessToken,

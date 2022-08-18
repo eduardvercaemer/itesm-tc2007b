@@ -1,4 +1,9 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  OnModuleInit,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AdminCredentials } from 'src/data/AdminCredentials';
 import { UserAdminEntity } from 'src/entities/user-admin.entity';
@@ -17,6 +22,15 @@ export class UserAdminService implements OnModuleInit {
   async onModuleInit() {
     const root = await this.initRootAdmin();
     this.#logger.log(`Root admin: ${root.email}`);
+  }
+
+  async find(id: string): Promise<UserAdminEntity> {
+    const user = await this.ds.manager.findOneBy(UserAdminEntity, { id });
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+
+    return user;
   }
 
   private get rootAdmin() {

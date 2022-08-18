@@ -7,9 +7,12 @@ import { LocalAdminStrategy } from './strategies/local-admin.strategy';
 import { AuthController } from './auth.controller';
 import { LocalAdminGuard } from './guards/local-admin.guard';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtAdminStrategy } from './strategies/jwt-admin.strategy';
+import { JwtAdminGuard } from './guards/jwt-admin.guard';
 
 @Module({
   imports: [
+    ConfigModule,
     EntitiesModule,
     PassportModule,
     JwtModule.registerAsync({
@@ -21,7 +24,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
     }),
   ],
-  providers: [AuthAdminService, LocalAdminStrategy, LocalAdminGuard],
+  providers: [
+    AuthAdminService,
+    LocalAdminStrategy,
+    LocalAdminGuard,
+    JwtAdminStrategy,
+    JwtAdminGuard,
+  ],
+  exports: [JwtAdminGuard, LocalAdminGuard],
   controllers: [AuthController],
 })
 export class AuthModule {}
