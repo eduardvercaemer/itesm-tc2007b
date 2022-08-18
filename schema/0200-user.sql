@@ -6,5 +6,6 @@ create table if not exists "user" (
   "email" varchar,
   "password" varchar,
 
+  constraint "user_pkey" primary key ("id"),
   constraint "user_email_uq" unique ("email")
 );
