@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { UserKind } from 'src/data/UserKind';
 import { ChildEntity, Column } from 'typeorm';
 import { UserEntity } from './user.entity';
@@ -8,5 +9,6 @@ export class UserAdminEntity extends UserEntity {
   email!: string;
 
   @Column({ nullable: true })
+  @Exclude()
   password!: string;
 }

@@ -1,4 +1,10 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { UserAdminEntity } from 'src/entities/user-admin.entity';
 import { CurrentUserAdmin } from '../auth/decorators/current-user-admin.decorator';
 import { JwtAdminGuard } from '../auth/guards/jwt-admin.guard';
@@ -10,6 +16,7 @@ export class UserAdminController {
 
   @Get()
   @UseGuards(JwtAdminGuard)
+  @UseInterceptors(ClassSerializerInterceptor)
   async get(
     @CurrentUserAdmin() user: UserAdminEntity,
   ): Promise<UserAdminEntity> {
