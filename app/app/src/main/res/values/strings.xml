@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">app</string>
+    <string name="please_log_in">Please Log In</string>
+    <string name="login">Login</string>
+    <string name="cancel">Cancel</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login_failed">Invalid credentials !</string>
+    <string name="logged_in">Logged in!</string>
 </resources>
